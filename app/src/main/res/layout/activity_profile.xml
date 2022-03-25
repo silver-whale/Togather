@@ -8,7 +8,7 @@
         android:id="@+id/user_iv"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:src="@mipmap/ic_launcher_round"></ImageView>
 
     <RelativeLayout
@@ -16,25 +16,72 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/user_iv"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/name_tv"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="닉네임">
-        </TextView>
+            android:layout_centerHorizontal="true"
+            android:text="닉네임"></TextView>
 
         <EditText
             android:id="@+id/name_et"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/name_tv">
-        </EditText>
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/name_tv"></EditText>
+
+
+        <TextView
+            android:id="@+id/hashtag_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+
+            android:text="해시태그"
+            android:layout_below="@id/name_et"></TextView>
+
+
+
+        <TextView
+            android:id="@+id/hashtag_show"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hashtag_tv"
+            android:layout_centerHorizontal="true"
+            android:text="Textview"></TextView>
+
+
+        <EditText
+            android:id="@+id/hashtag_et"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hashtag_show"
+            android:layout_centerHorizontal="true"
+            ></EditText>
+
+        <Button
+            android:id="@+id/hashtag_add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:text="추가"
+            android:layout_below="@+id/hashtag_et"
+            android:layout_centerHorizontal="true"
+            ></Button>
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/profile_okay_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/input_ll"
+        android:layout_centerHorizontal="true"
+        android:text="완료"></Button>
 
 </RelativeLayout>
