@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -54,14 +55,10 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun addProfile(profileImageUrl:String, nickname: String, hashtags: ArrayList<String>) {
         val user = Firebase.auth.currentUser
-        user?.let {
-            for (profile in it.providerData) {
-                // Problem : 값이 두 개 추가됨
-                val providerId = profile.providerId
-                val uid = profile.uid
+        if(user != null){
+                val uid = user.uid
                 var umodel: UserModel = UserModel(profileImageUrl, nickname, hashtags)
                 databaseReference.child("user").child(uid).setValue(umodel)
-            }
         }
     }
 }
