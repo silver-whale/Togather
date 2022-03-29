@@ -14,6 +14,7 @@ class ChatAdapter(private val ChatList: Array<Chat>) :
      * (custom ViewHolder).
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val from = view.findViewById<TextView>(R.id.tv_from)
         val message = view.findViewById<TextView>(R.id.tv_message)
         val time = view.findViewById<TextView>(R.id.tv_time)
     }
@@ -32,11 +33,17 @@ class ChatAdapter(private val ChatList: Array<Chat>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
+        viewHolder.message.text = ChatList.get(position).from
         viewHolder.message.text = ChatList.get(position).message
         viewHolder.time.text = ChatList.get(position).time
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = ChatList.size
+        
+    fun addChat(chat: Chat) {
+        datas.add(chat)
+        notifyDataSetChanged()
+    }
 
 }
