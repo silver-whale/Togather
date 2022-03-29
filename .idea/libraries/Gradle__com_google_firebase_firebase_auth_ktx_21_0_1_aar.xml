@@ -1,11 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.firebase:firebase-auth-ktx:21.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/789326b6fef1c2cb0df17c7c9e578c85/transformed/firebase-auth-ktx-21.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/24fe54963e8a5f9bf6069aeae178201f/transformed/firebase-auth-ktx-21.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/068a2514756aa8e7c5bd39d3e1f93857/transformed/firebase-auth-ktx-21.0.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/068a2514756aa8e7c5bd39d3e1f93857/transformed/firebase-auth-ktx-21.0.1/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/068a2514756aa8e7c5bd39d3e1f93857/transformed/firebase-auth-ktx-21.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/068a2514756aa8e7c5bd39d3e1f93857/transformed/firebase-auth-ktx-21.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/068a2514756aa8e7c5bd39d3e1f93857/transformed/firebase-auth-ktx-21.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-auth-ktx/21.0.1/1da0566abe4a987408b85a164dd285eada0538c6/firebase-auth-ktx-21.0.1-javadoc.jar!/" />

@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_profile.*
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -46,7 +47,6 @@ class ProfileActivity : AppCompatActivity() {
 
 
         profile_okay_btn.setOnClickListener(View.OnClickListener() {
-            // 이미지 url 전송 필요
             addProfile("", name_et.getText().toString(), hashtags)
             startActivity(Intent(this, MainActivity::class.java))
         })
@@ -57,8 +57,9 @@ class ProfileActivity : AppCompatActivity() {
         val user = Firebase.auth.currentUser
         if(user != null){
                 val uid = user.uid
-                var umodel: UserModel = UserModel(profileImageUrl, nickname, hashtags)
-                databaseReference.child("user").child(uid).setValue(umodel)
+                val newUser = UserModel(uid, nickname, hashtags)
+//                result.put("photo", "")
+                databaseReference.child("user").child(uid).setValue(newUser)
         }
     }
 }
