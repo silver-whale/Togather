@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         var usersList = ArrayList<UserModel>()
         val userListener = object : ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
                 if(dataSnapshot.getValue() == null) return
 
                 val temp = dataSnapshot.getValue() as HashMap<String, HashMap<String, HashMap<String, String>>>
@@ -80,8 +81,9 @@ class MainActivity : AppCompatActivity() {
                     val tname = getValues!!.get("nickname")
                     val ttag : ArrayList<String> = getValues!!.get("hashtag") as ArrayList<String>
                     val tempUser = UserModel(tuid!!, tname!!, ttag)
-                    // 객체는 제대로 생성되는 것을 확인함
-                    usersList.add(tempUser!!)
+
+                    if (! usersList.contains(tempUser))
+                        usersList.add(tempUser!!)
 
                     val userAdapter = ListAdapter(applicationContext, usersList)
                     search_lv.adapter = userAdapter

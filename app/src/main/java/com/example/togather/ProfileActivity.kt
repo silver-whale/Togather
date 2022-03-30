@@ -89,9 +89,10 @@ class ProfileActivity : AppCompatActivity() {
     private fun addProfile(profileImageUrl:String, nickname: String, hashtags: ArrayList<String>) {
         val user = Firebase.auth.currentUser
         if(user != null){
-                val uid = user.uid
-                val newUser = UserModel(uid, nickname, hashtags)
-                databaseReference.child("user").child(uid).setValue(newUser)
+            if(hashtags.isEmpty()) hashtags.add(" ")
+            val uid = user.uid
+            val newUser = UserModel(uid, nickname, hashtags)
+            databaseReference.child("user").child(uid).setValue(newUser)
         }
     }
 

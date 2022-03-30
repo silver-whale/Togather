@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-
+            android:layout_marginTop="30dp"
             android:text="해시태그"
             android:layout_below="@id/name_et"></TextView>
 
@@ -48,10 +48,9 @@
         <TextView
             android:id="@+id/hashtag_show"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_below="@id/hashtag_tv"
-            android:layout_centerHorizontal="true"
-            android:text="Textview"></TextView>
+            android:layout_centerHorizontal="true"></TextView>
 
 
         <EditText
