@@ -32,8 +32,8 @@
         android:id="@+id/search_lv"
         android:layout_width="match_parent"
         android:layout_height="550dp"
-        android:layout_below="@id/search_rl"
-        android:layout_above="@+id/profile_btn"></ListView>
+        android:layout_above="@+id/profile_btn"
+        android:layout_below="@id/search_rl"></ListView>
 
     <Button
         android:id="@+id/profile_btn"

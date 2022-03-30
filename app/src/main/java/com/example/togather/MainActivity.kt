@@ -25,6 +25,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
 
+    var UList : ArrayList<UserModel> = ArrayList<UserModel>()
+
+    fun changeList(value:UserModel){
+        UList.add(value)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Togather)
         // if not logined -> activity_login
@@ -34,6 +40,23 @@ class MainActivity : AppCompatActivity() {
 
         database = Firebase.database.reference
 
+        database.child("user").get().addOnSuccessListener {
+            if(it.value != null){
+                val temp = it.value as HashMap<String, HashMap<String, HashMap<String, String>>>
+                for (key in temp!!.keys) {
+                    val getValues = temp.get(key) as HashMap<String, String>
+                    val tuid = getValues.get("uid")!!
+                    val tname = getValues.get("nickname")!!
+                    val ttag: ArrayList<String> = getValues!!.get("hashtag") as ArrayList<String>
+                    val tpuid = getValues.get("profileUrl")!!
+                    val tempUser = UserModel(tuid, tname, ttag, tpuid)
+                    changeList(tempUser)
+                }
+                val userAdapter = ListAdapter(applicationContext, UList)
+                search_lv.adapter = userAdapter
+            }
+        }
+
         profile_btn.setOnClickListener{
             startActivity(Intent(this, ProfileActivity::class.java))
         }
@@ -42,19 +65,26 @@ class MainActivity : AppCompatActivity() {
             var searchList = ArrayList<UserModel>()
             val findTag = search_et.getText().toString()
 
-            if (findTag == ""){
-                addUserListener(database)
+            if(findTag == ""){
+                val totalAdapter = ListAdapter(applicationContext, UList)
+                search_lv.adapter = totalAdapter
                 return@setOnClickListener
             }
-
-            for(i in 0..search_lv.adapter.count-1){
-                val oneUser = search_lv.adapter.getItem(i) as UserModel
-                val userHashtag = oneUser.hashtag
-                if (userHashtag.contains(findTag)) searchList.add(oneUser)
+            else {
+                for (i in 0..UList.size - 1) {
+                    val oneUser = UList.get(i)
+                    val userHashtag = oneUser.hashtag
+                    for(str in userHashtag){
+                        if (str.contains(findTag)) {
+                            searchList.add(oneUser)
+                            break
+                        }
+                    }
+                }
+                val searchAdapter = ListAdapter(applicationContext, searchList)
+                search_lv.adapter = searchAdapter
             }
 
-            val searchAdapter = ListAdapter(applicationContext, searchList)
-            search_lv.adapter = searchAdapter
         }
 
         search_lv.onItemClickListener = AdapterView.OnItemClickListener{parent, view, position, id ->
@@ -62,7 +92,6 @@ class MainActivity : AppCompatActivity() {
 
             Log.i("uid get?", selection.uid)
         }
-        addUserListener(database)
     }
 
     private fun addUserListener(userReference : DatabaseReference){
@@ -80,11 +109,12 @@ class MainActivity : AppCompatActivity() {
                     val tuid = getValues!!.get("uid")
                     val tname = getValues!!.get("nickname")
                     val ttag : ArrayList<String> = getValues!!.get("hashtag") as ArrayList<String>
-                    val tempUser = UserModel(tuid!!, tname!!, ttag)
+                    val tpuid = getValues!!.get("profileUrl")
+                    val tempUser = UserModel(tuid!!, tname!!, ttag, tpuid!!)
 
-                    if (! usersList.contains(tempUser))
+                    if (!usersList.contains(tempUser)){
                         usersList.add(tempUser!!)
-
+                    }
                     val userAdapter = ListAdapter(applicationContext, usersList)
                     search_lv.adapter = userAdapter
                 }
@@ -96,7 +126,5 @@ class MainActivity : AppCompatActivity() {
         }
         userReference.addValueEventListener(userListener)
     }
-
-
-
 }
+

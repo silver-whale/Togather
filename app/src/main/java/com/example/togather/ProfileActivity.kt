@@ -4,15 +4,19 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.DocumentsContract
 import android.util.Log
 import android.view.View
 import android.widget.ActionMenuView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -25,6 +29,11 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_profile.*
 import java.io.File
+import java.io.IOException
+import java.lang.Exception
+import java.net.HttpURLConnection
+import java.net.MalformedURLException
+import java.net.URL
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -34,7 +43,7 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
 
-    lateinit var profileUri : Uri
+    var gotUri : String = ""
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +54,13 @@ class ProfileActivity : AppCompatActivity() {
         // Initialize Authentication, Database, Storage
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference()
+
+//        val curUser = FirebaseAuth.getInstance().currentUser
+//        if(curUser != null){
+//            val photoUrl = curUser.photoUrl
+//            gotUri = photoUrl.toString()
+//            profile_iv.setImageURI(photoUrl)
+//        }
 
         profile_iv.setOnClickListener(View.OnClickListener() {
             when{
@@ -65,33 +81,32 @@ class ProfileActivity : AppCompatActivity() {
                     1000
                 )
             }
-
         })
-
 
         var hashtags = ArrayList<String>()
 
         hashtag_add_btn.setOnClickListener(View.OnClickListener(){
-            hashtags.add(hashtag_et.getText().toString())
+            val gotTag = hashtag_et.getText().toString()
+            hashtags.add("#" + gotTag)
             hashtag_et.setText(null)
-
-            hashtag_show.setText(hashtags.joinToString(separator = " "))
+            hashtag_show.setText(hashtags.joinToString(separator = "  "))
         })
 
 
         profile_okay_btn.setOnClickListener(View.OnClickListener() {
-            addProfile("", name_et.getText().toString(), hashtags)
+            addProfile(name_et.getText().toString(), hashtags, gotUri)
             startActivity(Intent(this, MainActivity::class.java))
         })
 
     }
 
-    private fun addProfile(profileImageUrl:String, nickname: String, hashtags: ArrayList<String>) {
+
+    private fun addProfile(nickname: String, hashtags: ArrayList<String>, puri : String) {
         val user = Firebase.auth.currentUser
         if(user != null){
             if(hashtags.isEmpty()) hashtags.add(" ")
             val uid = user.uid
-            val newUser = UserModel(uid, nickname, hashtags)
+            val newUser = UserModel(uid, nickname, hashtags, puri)
             databaseReference.child("user").child(uid).setValue(newUser)
         }
     }
@@ -129,7 +144,7 @@ class ProfileActivity : AppCompatActivity() {
                 val selectedImageUri : Uri? = data?.data
                 if(selectedImageUri != null){
                     profile_iv.setImageURI(selectedImageUri)
-                    profileUri = selectedImageUri
+                    gotUri = selectedImageUri.toString()
                 }
                 else{
                     Toast.makeText(this, "Cannot load Image", Toast.LENGTH_SHORT).show()

@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:gravity="center">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이미지를 등록하세요"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/profile_iv"
+        android:layout_centerInParent="true"/>
+
+
     <ImageView
         android:id="@+id/profile_iv"
         android:layout_width="100dp"
@@ -24,31 +33,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
             android:text="닉네임"></TextView>
 
         <EditText
             android:id="@+id/name_et"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/name_tv"></EditText>
+            android:layout_below="@id/name_tv"
+            android:layout_centerHorizontal="true"></EditText>
 
 
         <TextView
             android:id="@+id/hashtag_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/name_et"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:text="해시태그"
-            android:layout_below="@id/name_et"></TextView>
-
+            android:text="해시태그"></TextView>
 
 
         <TextView
             android:id="@+id/hashtag_show"
             android:layout_width="300dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:layout_below="@id/hashtag_tv"
             android:layout_centerHorizontal="true"></TextView>
 
@@ -58,18 +67,16 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/hashtag_show"
-            android:layout_centerHorizontal="true"
-            ></EditText>
+            android:layout_centerHorizontal="true"></EditText>
 
         <Button
             android:id="@+id/hashtag_add_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:text="추가"
             android:layout_below="@+id/hashtag_et"
             android:layout_centerHorizontal="true"
-            ></Button>
+            android:backgroundTint="@color/black"
+            android:text="추가"></Button>
 
     </RelativeLayout>
 
