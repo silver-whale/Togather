@@ -5,7 +5,7 @@
     android:gravity="center">
 
     <ImageView
-        android:id="@+id/user_iv"
+        android:id="@+id/profile_iv"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerInParent="true"
@@ -15,7 +15,7 @@
         android:id="@+id/input_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_iv"
+        android:layout_below="@+id/profile_iv"
         android:gravity="center"
         android:orientation="horizontal">
 

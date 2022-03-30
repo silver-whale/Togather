@@ -18,6 +18,7 @@ import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
 import com.google.protobuf.Value
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_profile.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,8 +32,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        database = Firebase.database.reference
+
         profile_btn.setOnClickListener{
             startActivity(Intent(this, ProfileActivity::class.java))
+        }
+
+        search_btn.setOnClickListener{
+            var searchList = ArrayList<UserModel>()
+            val findTag = search_et.getText().toString()
+
+            if (findTag == ""){
+                addUserListener(database)
+                return@setOnClickListener
+            }
+
+            for(i in 0..search_lv.adapter.count-1){
+                val oneUser = search_lv.adapter.getItem(i) as UserModel
+                val userHashtag = oneUser.hashtag
+                if (userHashtag.contains(findTag)) searchList.add(oneUser)
+            }
+
+            val searchAdapter = ListAdapter(applicationContext, searchList)
+            search_lv.adapter = searchAdapter
         }
 
         search_lv.onItemClickListener = AdapterView.OnItemClickListener{parent, view, position, id ->
@@ -40,9 +62,6 @@ class MainActivity : AppCompatActivity() {
 
             Log.i("uid get?", selection.uid)
         }
-
-        database = Firebase.database.reference
-
         addUserListener(database)
     }
 
@@ -50,7 +69,8 @@ class MainActivity : AppCompatActivity() {
         var usersList = ArrayList<UserModel>()
         val userListener = object : ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                val user = dataSnapshot.getValue<UserModel>()
+                if(dataSnapshot.getValue() == null) return
+
                 val temp = dataSnapshot.getValue() as HashMap<String, HashMap<String, HashMap<String, String>>>
                 val gotUser = temp.get("user")
 
@@ -74,6 +94,7 @@ class MainActivity : AppCompatActivity() {
         }
         userReference.addValueEventListener(userListener)
     }
+
 
 
 }
