@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.twoweeks.togather">
+    package="com.twoweeks.dogJalal">
     <!--갤러리 권한-->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -14,13 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Togather">
         <activity
-            android:name=".SearchActivity"
+            android:name="com.twoweeks.dogJalal.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
+            android:name="com.twoweeks.dogJalal.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.twoweeks.dogJalal.LoginActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -30,10 +30,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChatActivity"
+            android:name="com.twoweeks.dogJalal.ChatActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.twoweeks.dogJalal.MainActivity"
             android:exported="true" />
     </application>
 
