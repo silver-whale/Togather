@@ -1,23 +1,24 @@
 {
   "project_info": {
     "project_number": "1067518464754",
+    "firebase_url": "https://togather-9a056-default-rtdb.firebaseio.com",
     "project_id": "togather-9a056",
     "storage_bucket": "togather-9a056.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1067518464754:android:fb6ac56f74ff200f8e366b",
+        "mobilesdk_app_id": "1:1067518464754:android:a65be7b69ddf80378e366b",
         "android_client_info": {
-          "package_name": "com.example.togather"
+          "package_name": "com.twoweeks.togather"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1067518464754-4l3o0kl9c8t93p15mlsfuo48t3ddb5ft.apps.googleusercontent.com",
+          "client_id": "1067518464754-svphfaiufuq0biion2pls726suhgtcoc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.togather",
+            "package_name": "com.twoweeks.togather",
             "certificate_hash": "bb7966531bc59b5049ac7b6b0df2c0a3577de426"
           }
         },

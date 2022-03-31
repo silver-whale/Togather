@@ -1,82 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="이미지를 등록하세요"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@id/profile_iv"
-        android:layout_centerInParent="true"/>
-
+    <View
+        android:id="@+id/logo_ll"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/lightPurple" />
 
     <ImageView
-        android:id="@+id/profile_iv"
+        android:id="@+id/user_iv"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerInParent="true"
-        android:src="@mipmap/ic_launcher_round"></ImageView>
+        android:layout_marginTop="60dp"
+        android:layout_below="@id/logo_ll"
+        android:background="@drawable/round_border"
+        ></ImageView>
 
     <RelativeLayout
         android:id="@+id/input_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_iv"
+        android:layout_below="@+id/user_iv"
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:text="닉네임"></TextView>
-
         <EditText
             android:id="@+id/name_et"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/name_tv"
+            android:text="닉네임 입력"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/lightPurple"
             android:layout_centerHorizontal="true"></EditText>
 
 
-        <TextView
-            android:id="@+id/hashtag_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/name_et"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:text="해시태그"></TextView>
+<!--        <TextView-->
+<!--            android:id="@+id/hashtag_tv"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+
+<!--            android:text="나를 소개하는 해시태그 입력하기"-->
+<!--            android:layout_below="@id/name_et"></TextView>-->
+
 
 
         <TextView
             android:id="@+id/hashtag_show"
             android:layout_width="300dp"
-            android:layout_height="80dp"
-            android:layout_below="@id/hashtag_tv"
-            android:layout_centerHorizontal="true"></TextView>
+            android:layout_height="130dp"
+            android:layout_below="@id/name_et"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:text="\n     ex) #강아지 #고양이"
+            android:background="@drawable/round_border"
+            android:textSize="12sp"></TextView>
 
+        <LinearLayout
+            android:id="@+id/hashtag_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hashtag_show"
+            android:gravity="center">
 
         <EditText
             android:id="@+id/hashtag_et"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/hashtag_show"
-            android:layout_centerHorizontal="true"></EditText>
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@drawable/round_border"
+            android:layout_centerHorizontal="true"
+            android:text="해시태그 입력"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            ></EditText>
 
         <Button
             android:id="@+id/hashtag_add_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/hashtag_et"
+            android:backgroundTint="@color/lightPurple"
+            android:textColor="@color/black"
+            android:text="추가"
+            android:layout_marginLeft="5dp"
             android:layout_centerHorizontal="true"
-            android:backgroundTint="@color/black"
-            android:text="추가"></Button>
+            ></Button>
+        </LinearLayout>
 
     </RelativeLayout>
 
@@ -84,7 +99,8 @@
         android:id="@+id/profile_okay_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/lightPurple"
+        android:textColor="@color/black"
         android:layout_marginTop="50dp"
         android:layout_below="@id/input_ll"
         android:layout_centerHorizontal="true"

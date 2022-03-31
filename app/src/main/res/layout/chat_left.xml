@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="start|top"
     android:layout_marginEnd="50dp">
 
 
@@ -13,7 +12,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="상대 이름"
-        android:visibility="gone"
         android:textColor="@color/black" />
 
     <TextView
@@ -25,22 +23,20 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/custom_round"
-        android:padding="10dp"
+        android:background="@color/lightYellow"
+        android:padding="7dp"
         android:text="상대 대화"
-        android:textColor="@color/black"
-        android:textSize="12dp" />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tv_message"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="5dp"
         android:layout_toEndOf="@id/tv_message"
+
         android:text="00시 00분"
-        android:textColor="@color/black"
-        android:textSize="9sp" />
+        android:textSize="10sp" />
 
 
 </RelativeLayout>

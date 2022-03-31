@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="구글 계정으로 로그인 해 주세요" />
+        android:text="구글계정으로 로그인해주세요" />
 
 
     <com.google.android.gms.common.SignInButton
