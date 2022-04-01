@@ -5,21 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+
     android:orientation="vertical">
 
     <View
         android:id="@+id/logo_ll"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/lightPurple"/>
+        android:background="@drawable/app_title"
+        android:orientation="vertical" />
 
     <LinearLayout
         android:id="@+id/search_rl"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:gravity="center"
-        android:layout_below="@+id/logo_ll">
+        android:layout_below="@+id/logo_ll"
+        android:forceDarkAllowed="false"
+        android:gravity="center">
 
         <EditText
             android:id="@+id/search_et"
@@ -27,18 +29,18 @@
             android:layout_height="match_parent"
             android:layout_marginRight="10dp"
             android:background="@drawable/round_border"
-            android:text="   검색어를 입력하세요"
+            android:hint="   검색어를 입력하세요"
             android:textSize="12sp"></EditText>
 
         <Button
             android:id="@+id/search_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/lightYellow"
-            android:textColor="@color/black"
-            android:textSize="12sp"
             android:layout_alignParentRight="true"
-            android:text="찾기"></Button>
+            android:backgroundTint="@color/lightYellow"
+            android:text="찾기"
+            android:textColor="@color/black"
+            android:textSize="12sp"></Button>
     </LinearLayout>
 
     <ListView

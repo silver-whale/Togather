@@ -1,9 +1,17 @@
 package com.twoweeks.dogJalal
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -14,53 +22,9 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
-
-        // Initialize Authentication, Database, Storage
-        database = FirebaseDatabase.getInstance()
-        databaseReference = database.getReference()
-
-        var hashtags = ArrayList<String>()
-
-        hashtag_add_btn.setOnClickListener(View.OnClickListener(){
-            hashtags.add(hashtag_et.getText().toString())
-            hashtag_et.setText(null)
-
-            hashtag_show.setText(hashtags.joinToString(separator = " "))
-
-        })
-
-
-        profile_okay_btn.setOnClickListener(View.OnClickListener() {
-            addProfile("", name_et.getText().toString(), hashtags)
-            startActivity(Intent(this, MainActivity::class.java))
-        })
-
-    }
-
-    private fun addProfile(profileImageUrl:String, nickname: String, hashtags: ArrayList<String>) {
-        val user = Firebase.auth.currentUser
-        if(user != null){
-            val uid = user.uid
-            val newUser = UserModel(uid, nickname, hashtags)
-//                result.put("photo", "")
-            databaseReference.child("user").child(uid).setValue(newUser)
-        }
-    }
-}
-
-/*class ProfileActivity : AppCompatActivity() {
-
-    lateinit var database: FirebaseDatabase
-    lateinit var databaseReference: DatabaseReference
-
-    lateinit var profileUri : Uri
-
+    var gotUri : String = ""
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
@@ -68,7 +32,7 @@ class ProfileActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference()
 
-        profile_iv.setOnClickListener(View.OnClickListener() {
+        /*profile_iv.setOnClickListener(View.OnClickListener() {
             when{
                 ContextCompat.checkSelfPermission(
                     this,
@@ -87,30 +51,31 @@ class ProfileActivity : AppCompatActivity() {
                     1000
                 )
             }
-
-        })
-
+        })*/
 
         var hashtags = ArrayList<String>()
 
         hashtag_add_btn.setOnClickListener(View.OnClickListener(){
-            hashtags.add(hashtag_et.getText().toString())
+            val gotTag = hashtag_et.getText().toString()
+            hashtags.add("#" + gotTag)
             hashtag_et.setText(null)
-
-            hashtag_show.setText(hashtags.joinToString(separator = " "))
+            hashtag_show.setText(hashtags.joinToString(separator = "  "))
         })
 
 
         profile_okay_btn.setOnClickListener(View.OnClickListener() {
-            addProfile("", name_et.getText().toString(), hashtags)
+            addProfile(name_et.getText().toString(), hashtags, gotUri)
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         })
+
 
     }
 
-    private fun addProfile(profileImageUrl:String, nickname: String, hashtags: ArrayList<String>) {
+    private fun addProfile(nickname: String, hashtags: ArrayList<String>, puri : String) {
         val user = Firebase.auth.currentUser
         if(user != null){
+            if(hashtags.isEmpty()) hashtags.add(" ")
             val uid = user.uid
             val newUser = UserModel(uid, nickname, hashtags)
             databaseReference.child("user").child(uid).setValue(newUser)
@@ -149,8 +114,8 @@ class ProfileActivity : AppCompatActivity() {
             2000 -> {
                 val selectedImageUri : Uri? = data?.data
                 if(selectedImageUri != null){
-                    profile_iv.setImageURI(selectedImageUri)
-                    profileUri = selectedImageUri
+                    //profile_iv.setImageURI(selectedImageUri)
+                    gotUri = selectedImageUri.toString()
                 }
                 else{
                     Toast.makeText(this, "Cannot load Image", Toast.LENGTH_SHORT).show()
@@ -174,4 +139,4 @@ class ProfileActivity : AppCompatActivity() {
             .create()
             .show()
     }
-}*/
+}

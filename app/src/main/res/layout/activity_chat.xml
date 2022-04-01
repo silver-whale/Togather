@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,27 +9,30 @@
         android:id="@+id/rl_miniprofile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3F51B5"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:background="@color/lightYellow"
+        android:outlineProvider="bounds">
 
         <ImageView
             android:id="@+id/iv_picture"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
-            android:background="@color/lightYellow" />
+            android:background="@color/lightYellow"/>
 
         <TextView
+            android:id="@+id/tv_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_toRightOf="@id/iv_picture"
-            android:gravity="center_horizontal"
-
-            android:text="상대방 닉네임" />
+            android:gravity="start"
+            android:text="상대방 닉네임"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
 
     </RelativeLayout>
 
@@ -40,19 +42,25 @@
         android:layout_height="match_parent"
         android:layout_above="@id/rl_text"
         android:layout_below="@id/rl_miniprofile"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:background="@color/lightPurple" />
 
     <RelativeLayout
         android:id="@+id/rl_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
 
         <Button
             android:id="@+id/btn_sendImg"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+" />
+            android:backgroundTint="@color/white"
+            android:text="+"
+            android:textColor="@color/lightGrey"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/et_message"
@@ -67,7 +75,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="Send" />
+            android:backgroundTint="@color/lightGrey"
+            android:text="Send"
+            android:textAllCaps="false" />
 
     </RelativeLayout>
 

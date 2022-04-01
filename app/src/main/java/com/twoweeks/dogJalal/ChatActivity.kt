@@ -11,11 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_chat.*
@@ -24,14 +27,15 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
 import android.Manifest
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.provider.MediaStore
+import androidx.core.graphics.createBitmap
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.chat_left.*
-
-// mia2583 OkObrKx9qdh9LWA2inzyN0b8lGp1
-// myeongseo DqMuqfpCwzWokczFCgn0T2r4sJf1
 
 class ChatActivity : AppCompatActivity() {
     //recyclerView 관련 변수
@@ -43,6 +47,7 @@ class ChatActivity : AppCompatActivity() {
     lateinit var currentUser: FirebaseUser
     lateinit var sender: String
     lateinit var receiver: String
+    private lateinit var nickName: String
 
     // 파이어베이스 연결 관련 변수
     lateinit var database: FirebaseDatabase
@@ -52,7 +57,6 @@ class ChatActivity : AppCompatActivity() {
     val REQUEST_GALLERY_TAKE = 2
     lateinit var storage: FirebaseStorage
     lateinit var photoUrl: Uri
-    lateinit var downUrl: Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         // 데이터베이스 연결
         database = Firebase.database
@@ -66,6 +70,8 @@ class ChatActivity : AppCompatActivity() {
         // 채팅 상재 정보 가져오기
         receiver = intent.getStringExtra("receiver") ?: ""
         if (receiver == "") finish()
+        nickName = intent.getStringExtra("nickName") ?: "(닉네임 없음)"
+        tv_nickname.text = nickName
         // 리사이클러뷰 연결
         adapter = ChatAdapter(datas, sender)
         rc_chat.adapter = adapter
@@ -170,7 +176,7 @@ class ChatActivity : AppCompatActivity() {
                 for (d in dataSnapshot.children) {
                     var time = d.key.toString()
                     Log.e("chatData", d.toString())
-                    var type = d.child("image").value.toString()
+                    var type = d.child("img").value.toString()
                     var msg = d.child("msg").value.toString()
 
                     // 채팅 내용 파일에 저장
@@ -204,6 +210,7 @@ class ChatActivity : AppCompatActivity() {
         var imageFileName = "IMAGE" + timestamp + ".png"
         var storageRef = storage?.reference?.child("sendImages")?.child(imageFileName)
 
+        // 이미지 파이어베이스에 저장하기
         val uploadTask: StorageTask<*>
         uploadTask = storageRef.putFile(photoUrl!!)
         uploadTask.continueWithTask(Continuation <UploadTask.TaskSnapshot, Task<Uri>> { task ->
@@ -228,11 +235,10 @@ class ChatActivity : AppCompatActivity() {
 
                 if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                     uploadImage()
-                }
-
                 } else {
-                //취소 시 작동
-                finish()
+                    //취소 시 작동
+                    //finish()
+                }
             }
         }
     }
