@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
                     val tuid = getValues!!.get("uid")
                     val tname = getValues!!.get("nickname")
                     val ttag : ArrayList<String> = getValues!!.get("hashtag") as ArrayList<String>
-                    val tpuid = getValues!!.get("profileUrl")
+                    // val tpuid = getValues!!.get("profileUrl")
                     val tempUser = UserModel(tuid!!, tname!!, ttag)
 
                     if (!usersList.contains(tempUser)){
