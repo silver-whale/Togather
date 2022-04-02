@@ -97,6 +97,14 @@
           }
         },
         {
+          "client_id": "799899905081-hoqf0bl0spcc5dmh8rel2575apod9o84.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.twoweeks.togather",
+            "certificate_hash": "090bb710a4da730f22ea377c29d96aee0b004456"
+          }
+        },
+        {
           "client_id": "799899905081-qc9etoifg247mesprmqmu3u5i0h6ioc0.apps.googleusercontent.com",
           "client_type": 3
         }
